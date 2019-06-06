@@ -54,31 +54,31 @@ if __name__ == '__main__':
     try:
         while True:
             if(IO.input(22) == False):
-                print("Objeto serca")
+                print("The presence of an object was detected")
                 temperature, humidity = dht22_reader()
 
                 barcode = read_document()
                 if barcode:
                     
                     if (barcode == oldBarcode):
-                        print("Codigo repetido")
+                        print("The barcode is repeated")
                         
                     else:
                         oldBarcode = barcode
-                        print("Nuevo codigo")
-                        print("Barcode", oldBarcode)
+                        print("Barcode detected")
+                        print("Barcode: ", oldBarcode)
                         send_data(oldBarcode, temperature, humidity)
                     
                 else:
-                    print("NOT Barcode")
+                    print("No barcode was detected")
                     time.sleep(30)
                     sl = sl + 1
                     if sl == 2:
-                        print("Caja sin codigo")
+                        print("The object does not have a barcode")
                         send_data('', temperature, humidity)
                         sl = 0
             else:
-                print("NO object")
+                print("Object not detected")
                 clean_document()
                 
             
