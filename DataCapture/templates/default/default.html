@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Document {% endblock %}</title>
+    {% load bootstrap4 %}
+    {% block cssSpace %}
+        {# This the CSS space #}
+        {% bootstrap_css %}
+    {% endblock %}
+</head>
+<body style="background-color: rgba(255, 192, 8, 0.6);">
+    {% block header %}
+{#    <h4> This is default block header</h4>#}
+    {% endblock %}
+
+    {% block content %}
+{#        <h5> This is content</h5>#}
+    {% endblock %}
+
+    {% block footer %}
+{#        <h5>This is Default Footer</h5>#}
+    {% endblock %}
+
+
+    {% block jsSpace %}
+        {# This the JavaScript space #}
+        {% bootstrap_javascript jquery='full' %}
+    {% endblock %}
+</body>
+</html>
