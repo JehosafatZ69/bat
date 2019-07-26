@@ -1,5 +1,4 @@
 #!/usr/bin/python
-import Adafruit_DHT as dht
 import json
 import RPi.GPIO as IO
 import time
@@ -7,14 +6,7 @@ from firebase import firebase
 
 IO.setwarnings(False)
 IO.setmode(IO.BCM)
-IO.setup(22, IO.IN) ## GPIO 14 -> IR sensor as input {}=> orange = 5v, yellow = gnd, green = pin22
-
-def dht22_reader():
-    humidity, temperature = dht.read_retry(dht.DHT22, 27)
-    humidity = round(humidity, 3)
-    temperature = round(temperature)
-    
-    return (temperature, humidity)
+IO.setup(22, IO.IN)
 
 def read_document():
     Document = open('barCodeScanner.txt','r')
@@ -47,7 +39,7 @@ def send_data(barcode, temperature, humidity):
     response = fire.post('/push', data)
     print('Respopnse', response)
     return
-    
+
 if __name__ == '__main__':
     sl = 0
     oldBarcode = 0
@@ -55,7 +47,7 @@ if __name__ == '__main__':
         while True:
             if(IO.input(22) == False):
                 print("The presence of an object was detected")
-                temperature, humidity = dht22_reader()
+                temperature, humidity = 00, 00
 
                 barcode = read_document()
                 if barcode:
@@ -84,3 +76,4 @@ if __name__ == '__main__':
             
     except KeyboardInterrupt:
         pass
+

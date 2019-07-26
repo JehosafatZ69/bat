@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+{% block title %}
+    Capture
+{% endblock %}
+
+{% block header %}
+{#    <h5>This the capture header</h5>#}
+{#    {% include 'default/header.html' %}#}
+{% endblock %}
+
+{% block content %}
+{#    <h6>This the capture content</h6>#}
+    <form method="post" name="dataSend">
+        {% csrf_token %}
+        <div class="card bg-light border-dark mx-auto"
+             style="
+                width: 28rem;
+                box-shadow: 0px 0px 60px 5px rgba(0, 0, 0, 0.7);
+                top: 15rem;
+                background-position-y: -1px;
+                border-radius: 20px;">
+            <div class="card-body">
+                <input type="text" name='barcode' id='barcode' class="form-control" style="font-family: TimesNewRoman;" placeholder="BarCode" autofocus aria-label="BarCode" >
+            </div>
+        </div>
+    </form>
+    {% block jsSpace %}
+        {# This the JavaScript space #}
+        <script>
+            var barcode = document.getElementById("barcode"), interval;
+            barcode.addEventListener("keyup", function () {
+               clearInterval(interval);
+               interval = setInterval(function () {
+                   if (barcode.value !== '') {
+                       document.dataSend.submit()
+                   }
+                   {#alert("You dont scrib");#}
+                   {#clearInterval(interval);#}
+               }, 1000);
+            });
+
+        </script>
+    {% endblock %}
+{% endblock %}
