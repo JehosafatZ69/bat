@@ -29,10 +29,10 @@ def send_data(barcode, temperature, humidity):
     data = {
         'code': barcode,
         'createdAt': time.time(),
-        'did': 'Raspbian',
-        'hasCode': hasCode,
-        'temperature': temperature,
-        'humidity': humidity
+        'did': 'AvantechPI',
+        'hasCode': hasCode
+        #'temperature': temperature,
+        #'humidity': humidity
     }
     print("DATA:", data)
     fire = firebase.FirebaseApplication('https://a-fs-dev.firebaseio.com/')
@@ -47,7 +47,7 @@ if __name__ == '__main__':
         while True:
             if(IO.input(4) == False):
                 print("The presence ofFalse an object was detected")
-                temperature, humidity = 1, 1
+                temperature, humidity = 1111, 1111
 
                 barcode = doc(True)
                 if barcode:
@@ -62,15 +62,16 @@ if __name__ == '__main__':
                         send_data(oldBarcode, temperature, humidity)
 
                 else:
-                    print("No barcode was detected")
+                    #print("No barcode was detected")
                     time.sleep(1)
                     sl = sl + 1
-                    if sl >= 30:
+                    if sl >= 80:
                         print("The object does not have a barcode")
                         send_data('', temperature, humidity)
                         sl = 0
             else:
                 print("Object not detected")
+		sl = 0
                 doc(False)
 
 
